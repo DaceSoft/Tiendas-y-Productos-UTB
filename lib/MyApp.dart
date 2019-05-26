@@ -75,7 +75,6 @@ class MyApp extends State<myapp> {
                             textAlign: TextAlign.center,
                           ),
                           width: 200,
-                          height: 40,
                         ),
                         Container(
                           padding: EdgeInsets.only(top: 30.0, left: 10.0, right: 10.0),
