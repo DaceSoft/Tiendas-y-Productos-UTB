@@ -28,7 +28,6 @@ class splash extends State<myhomepage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 4), () =>
         Navigator.of(context).pushNamedAndRemoveUntil(
