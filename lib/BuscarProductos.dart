@@ -75,18 +75,17 @@ class Buscar extends State<buscarproductos>{
           itemBuilder: (BuildContext context, int index){
             return Center(
                 child: Card(
-                  color: Colors.amberAccent,
                     child: Container(
                       child: ListTile(
                         title: Text(
                           "${Producto.Pbuscados[index].nombre_pro}",
-                          style: TextStyle(color: Colors.blue[700], fontSize: 30, fontFamily: 'Acme'),
+                          style: TextStyle(color: Colors.blue[700], fontSize: 30),
                         ),
                         subtitle: Column(
                           children: <Widget>[
                             Text(
                                 "${Tienda.Tbuscadas[index].nombre}",
-                                style: TextStyle(color: Colors.red, fontFamily: 'Pacifico', fontSize: 20)
+                                style: TextStyle(color: Colors.red,  fontSize: 20, fontFamily: 'Pacifico')
                             ),
                             Text(
                               "${Producto.Pbuscados[index].descripcion}",
@@ -96,7 +95,7 @@ class Buscar extends State<buscarproductos>{
                         ),
                         trailing: Text(
                           "${Producto.Pbuscados[index].precio}",
-                          style: TextStyle(fontSize: 50, fontFamily: 'Akronim', color: Colors.green[700]),
+                          style: TextStyle(fontSize: 50, fontFamily: 'Akronim', color: Colors.blueGrey),
                         ),
                       )
                     )

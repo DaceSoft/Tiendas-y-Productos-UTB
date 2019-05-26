@@ -17,7 +17,9 @@ class InformacionTiendas extends State<infotiendas>{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.blue[900]
+          backgroundColor: Colors.blue[900],
+        title: Text("Tiendas UTB", style: TextStyle(color: Colors.white),),
+        centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: Tienda.Tiendas.length,
@@ -25,13 +27,14 @@ class InformacionTiendas extends State<infotiendas>{
             return Center(
               child: Card(
                 child: Container(
-                  color: Colors.amber,
                   child: ListTile(
                     title: Text(
                       "${Tienda.Tiendas[index].nombre}",
-                      style: TextStyle(color: Colors.red, fontFamily: 'Acme', fontSize: 30)
+                      style: TextStyle(color: Colors.blue[700], fontFamily: 'Acme', fontSize: 30)
                     ),
                     onTap: (){
+                      resenas(Tienda.Tiendas[index].id);
+                      Tienda.Tiendas[index].calificacion = calificaciondelatienda(Tienda.Tiendas[index].id);//////////////////
                       Productosdetienda(Tienda.Tiendas[index].id);
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> infoTienda(Tienda.Tiendas[index])));
                     },
@@ -83,27 +86,35 @@ class infoTienda extends StatelessWidget{
                         child: Column(
                           children: <Widget>[
                             Text(
-                              "HORARIO ",
-                              style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: 'Pacifico'),
+                              "CALIFICACIÓN",
+                              style: TextStyle(color: Colors.red, fontSize: 20, ),
+                            ),
+                            Text(
+                              "${Ti.calificacion.toStringAsFixed(2)}",
+                              style: TextStyle(fontSize: 17),
+                            ),
+                            Text(
+                              "\nHORARIO ",
+                              style: TextStyle(color: Colors.red, fontSize: 20, ),
                             ),
                             Text(
                               "${Ti.horario}",
                               style: TextStyle(fontSize: 17),
                             ),
                             Text(
-                              "UBICACIÓN ",
-                              style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: 'Pacifico'),
+                              "\nUBICACIÓN ",
+                              style: TextStyle(color: Colors.red, fontSize: 20,),
                             ),
                             Text(
                               "${Ti.ubicacion}",
                               style: TextStyle(fontSize: 17),
-                            )
+                            ),
                           ],
                         ),
                       )
                     ],
                   ),
-                  Text("PRODUCTOS", style: TextStyle(color: Colors.red, fontSize: 20, fontFamily: 'Pacifico'),),
+                  Text("PRODUCTOS", style: TextStyle(color: Colors.red, fontSize: 20),),
                   Container(
                     width: 300,
                     height: 300,
@@ -116,7 +127,6 @@ class infoTienda extends StatelessWidget{
                               return Center(
                                 child: Card(
                                   child: Container(
-                                    color: Colors.amberAccent,
                                     child: ListTile(
                                       title: Text(
                                         "${Producto.ProductosenTienda[index].nombre_pro}",
@@ -136,7 +146,40 @@ class infoTienda extends StatelessWidget{
                             }
                         )
                     ),
-                  )
+                  ),
+                  Text("\nRESEÑAS ", style: TextStyle(color: Colors.red, fontSize: 20)),
+                  Container(
+                    width: 300,
+                    height: 300,
+                    color: Colors.blue,
+                    child: Card(
+                        child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemCount: resena.resenasdetiendas.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Center(
+                                child: Card(
+                                  child: Container(
+                                    child: ListTile(
+                                      title: Text(
+                                        "${persona.personasdetiendas[index].nombre}",
+                                        style: TextStyle(fontFamily: 'Acme', fontSize: 20, color: Colors.red[700]),
+                                      ),
+                                      subtitle: Text(
+                                          "${resena.resenasdetiendas[index].comentario}"
+                                      ),
+                                      trailing: Text(
+                                          "${resena.resenasdetiendas[index].puntuacion}",
+                                          style: TextStyle(fontFamily: 'Pacifico', fontSize: 40, color: Colors.amber)
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }
+                        )
+                    ),
+                  ),
                 ],
               )
           ),
@@ -169,6 +212,35 @@ void Productosdetienda(int a){
   for(int c=0; c<Producto.Productos.length; c++){
     if(Producto.Productos[c].id_tienda == a){
       Producto.ProductosenTienda.add(Producto.Productos[c]);
+    }
+  }
+}
+
+double calificaciondelatienda(int a){
+  double puntaje = 0;
+  int num = 0;
+  for (int i = 0; i<resena.resenas.length; i++){
+    if(resena.resenas[i].id_tien == a){
+      puntaje += resena.resenas[i].puntuacion;
+      num+=1;
+    }
+  }
+  puntaje = puntaje/num;
+  return puntaje;
+
+}
+
+void resenas (int a){
+  resena.resenasdetiendas.clear();
+  persona.personasdetiendas.clear();
+  for (int i=0; i<resena.resenas.length; i++){
+    if (resena.resenas[i].id_tien == a){
+      resena.resenasdetiendas.add(resena.resenas[i]);
+      for (int j=0; j<persona.personas.length; j++){
+        if (persona.personas[j].id == resena.resenas[i].id_per){
+          persona.personasdetiendas.add(persona.personas[j]);
+        }
+      }
     }
   }
 }

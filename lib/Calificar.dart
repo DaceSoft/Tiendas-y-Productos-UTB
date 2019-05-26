@@ -16,6 +16,11 @@ class calificacion extends StatefulWidget {
 
 class calificar extends State<calificacion> {
 
+
+  TextEditingController nombreper = new TextEditingController();
+  TextEditingController correoper = new TextEditingController();
+  TextEditingController comentper = new TextEditingController();
+
   double rating = 0.0;
   Tienda a = new Tienda();
   calificar(this.a);
@@ -46,6 +51,7 @@ class calificar extends State<calificacion> {
                         hintText: "Ingrese su nombre",
                         icon: Icon(Icons.account_circle),
                       ),
+                      controller: nombreper, autofocus: true,
                     ),
                   ),
                   Container(
@@ -55,6 +61,7 @@ class calificar extends State<calificacion> {
                         hintText: "Ingrese su correo electrónico",
                         icon: Icon(Icons.mail_outline),
                       ),
+                      controller: correoper, autofocus: true,
                     ),
                   ),
                   Text(
@@ -81,15 +88,44 @@ class calificar extends State<calificacion> {
                     padding: EdgeInsets.all(10.0),
                     decoration: BoxDecoration(border: Border.all(color: Colors.blue[700])),
                     child: SizedBox(
-                      height: 300,
+                      height: 100,
                       width: 300,
                       child: TextField(
+                        maxLines: 30,
                         decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: 'Comentarios'
                         ),
+                        controller: comentper, autofocus: true,
                       ),
                     ),
+                  ),
+                  Container(
+                      padding: EdgeInsets.all(30.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 60,
+                        child: RaisedButton(
+                          child: Text("Enviar", style: TextStyle(fontFamily: 'Acme', fontSize: 22)),
+                          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                          color: Colors.blue[700],
+                          elevation: 20.0,
+                          colorBrightness: Brightness.dark,
+                          onPressed: (){
+                            print("envio");
+                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> infotiendas()));
+                            int id = persona.personas.length +1;
+                            persona per = new persona(id, nombreper.text, correoper.text);
+                            persona.personas.add(per);
+
+                            resena res = new resena(id, rating.toInt(), comentper.text,  a.id);
+                            resena.resenas.add(res);
+
+                            showDialog(context: context, child: mydialog());
+                            Navigator.pop(context);
+                          },
+                        ),
+                      )
                   )
                 ],
               ),
@@ -97,5 +133,40 @@ class calificar extends State<calificacion> {
           ],
         ));
   }
+
+
+  mydialog(){
+    return AlertDialog(
+      title: Text("Gracias"),
+      content: Text("Tu reseña ha sido enviada."),
+      actions: <Widget>[
+        FlatButton(child: Text("Ok"),
+          onPressed: (){
+            Navigator.pop(context);
+
+          },
+        )
+      ],
+    );
+  }
+}
+
+class persona{
+  int id;
+  String nombre;
+  String correo;
+  persona([this.id, this.nombre, this.correo]);
+  static List<persona> personas = new List<persona>();
+  static List<persona> personasdetiendas = new List<persona>();
+}
+
+class resena{
+  int id_per;
+  int id_tien;
+  int puntuacion;
+  String comentario;
+  resena([this.id_per,this.puntuacion, this.comentario, this.id_tien]);
+  static List<resena> resenas = new List<resena>();
+  static List<resena> resenasdetiendas = new List<resena>();
 }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'BuscarProductos.dart';
 import 'InformacionTiendas.dart';
+import 'programadores.dart';
 
 class myapp extends StatefulWidget {
   @override
@@ -17,6 +18,31 @@ class MyApp extends State<myapp> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          children: <Widget>[
+            Container(
+              child: Image.asset('assets/images/utb.jpg'),
+            ),
+            ListTile(
+              title: Text("Inicio"),
+              leading: Icon(Icons.home, color: Colors.blue[700],),
+              onTap: (){
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    '/screen1', (Route<dynamic> route) => false);
+              },
+            ),
+            ListTile(
+              title: Text("Acerca de los programadores"),
+              leading: Icon(Icons.account_circle, color: Colors.blue[700]),
+              onTap: (){
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> programadores()));
+              },
+            ),
+          ],
+        )
+      ),
         appBar: AppBar(
           backgroundColor: Colors.blue[900],
           title: Text(
@@ -114,6 +140,7 @@ class Tienda {
   int id;
   String nombre, horario, ubicacion;
   Image foto;
+  double calificacion;
   Tienda([this.id, this.nombre, this.horario, this.ubicacion, this.foto]);
   static List<Tienda> Tiendas = List<Tienda>();
   static List<Tienda> Tbuscadas = new List<Tienda>();
