@@ -5,7 +5,6 @@ import 'MyApp.dart';
 class buscarproductos extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return Buscar();
   }
 
@@ -14,6 +13,9 @@ class buscarproductos extends StatefulWidget{
 class Buscar extends State<buscarproductos>{
 
   String ProductoaBuscar = "";
+
+
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -29,6 +31,9 @@ class Buscar extends State<buscarproductos>{
           onChanged: (String Value){
 
           ProductoaBuscar = Value;
+
+
+
 
           seleccion(ProductoaBuscar.toUpperCase());//touppercase: texto a mayuscula
           },
@@ -114,14 +119,23 @@ class Buscar extends State<buscarproductos>{
 
     //Esta funcion identifica que producto contiene lo que se esta buscando y se agrega a 2 listas
     for (int i = 0; i<Producto.Productos.length; i++){
+      print("rwarw");
+      print("el nombre ${Producto.Productos[i].nombre_pro} contiene $p?");
       if ((Producto.Productos[i].nombre_pro).contains(p)){
+        print("SI LO CONTIENE");
         Producto.Pbuscados.add(Producto.Productos[i]);
+        print("La lista hasta le momento es:");
+
+        for (var x in Producto.Pbuscados){
+          print("${x.nombre_pro}");
+        }
         for (int j = 0; j<Tienda.Tiendas.length; j++){
           if (Producto.Productos[i].id_tienda == Tienda.Tiendas[j].id){
             Tienda.Tbuscadas.add(Tienda.Tiendas[j]);
           }
         }
       }
+
     }
   }
 }

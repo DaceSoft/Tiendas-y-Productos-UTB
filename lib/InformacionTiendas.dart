@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'MyApp.dart';
 import 'Calificar.dart';
+import 'Clases.dart';
+
+
 class infotiendas extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -33,9 +36,18 @@ class InformacionTiendas extends State<infotiendas>{
                       style: TextStyle(color: Colors.blue[700], fontFamily: 'Acme', fontSize: 30)
                     ),
                     onTap: (){
+                      print(Tienda.Tiendas.length);
+                      print(index);
                       resenas(Tienda.Tiendas[index].id);
                       Tienda.Tiendas[index].calificacion = calificaciondelatienda(Tienda.Tiendas[index].id);//////////////////
-                      Productosdetienda(Tienda.Tiendas[index].id);
+                      Productosdetienda(index+1);
+                      
+                      for (var x in Producto.ProductosenTienda)
+                      {
+                        print (x.nombre_pro);
+                      }
+
+
                       Navigator.push(context, MaterialPageRoute(builder: (context)=> infoTienda(Tienda.Tiendas[index])));
                     },
                   )
@@ -77,13 +89,13 @@ class infoTienda extends StatelessWidget{
                   Row(
                     children: <Widget>[
                       Container(
-                        child: Ti.foto,
+                        color: Colors.blue[800],
                         width: 100,
                         height: 100,
                       ),
                       Container(
                         padding: EdgeInsets.all(20),
-                        child: Column(
+                        child: SizedBox(width: 180,height: 300,child: Column(
                           children: <Widget>[
                             Text(
                               "CALIFICACIÓN",
@@ -110,7 +122,7 @@ class infoTienda extends StatelessWidget{
                               style: TextStyle(fontSize: 17),
                             ),
                           ],
-                        ),
+                        ),),
                       )
                     ],
                   ),
@@ -211,9 +223,14 @@ class infoTienda extends StatelessWidget{
 }
 
 void Productosdetienda(int a){
+
+  
   Producto.ProductosenTienda.clear();
   for(int c=0; c<Producto.Productos.length; c++){
+
+    print("El id ${Producto.Productos[c].id_tienda} = $a?");
     if(Producto.Productos[c].id_tienda == a){
+      print("El id ${Producto.Productos[c].id_tienda} = $a?");
       Producto.ProductosenTienda.add(Producto.Productos[c]);
     }
   }

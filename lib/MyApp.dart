@@ -138,7 +138,7 @@ class MyApp extends State<myapp> {
 class Tienda {
   int id;
   String nombre, horario, ubicacion;
-  Image foto;
+  String foto;
   double calificacion;
   Tienda([this.id, this.nombre, this.horario, this.ubicacion, this.foto]);
   static List<Tienda> Tiendas = List<Tienda>();
@@ -147,10 +147,11 @@ class Tienda {
 }
 
 class Producto{
+  int id_producto;
   int id_tienda;
   String nombre_pro, descripcion;
-  String precio;
-  Producto([this.id_tienda, this.nombre_pro, this.precio, this.descripcion]);
+  int precio;
+  Producto([this.id_producto,this.id_tienda, this.nombre_pro, this.precio, this.descripcion]);
   static List<Producto> Productos = List<Producto>();
   static List<Producto> Pbuscados = new List <Producto>();
   static List<Producto> ProductosenTienda = new List <Producto>();
