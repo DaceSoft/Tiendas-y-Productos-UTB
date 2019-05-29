@@ -36,7 +36,6 @@ class splash extends State<myhomepage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: _buildContent1(),
     );

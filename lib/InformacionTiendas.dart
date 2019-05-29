@@ -116,9 +116,12 @@ class infoTienda extends StatelessWidget{
                   ),
                   Text("PRODUCTOS", style: TextStyle(color: Colors.red, fontSize: 20),),
                   Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.blue,
+                    ),
                     width: 300,
                     height: 300,
-                    color: Colors.blue,
                     child: Card(
                         child: ListView.builder(
                             scrollDirection: Axis.vertical,
