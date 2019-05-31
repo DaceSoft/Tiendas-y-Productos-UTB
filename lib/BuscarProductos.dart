@@ -31,10 +31,6 @@ class Buscar extends State<buscarproductos>{
           onChanged: (String Value){
 
           ProductoaBuscar = Value;
-
-
-
-
           seleccion(ProductoaBuscar.toUpperCase());//touppercase: texto a mayuscula
           },
         ),
@@ -89,7 +85,7 @@ class Buscar extends State<buscarproductos>{
                         subtitle: Column(
                           children: <Widget>[
                             Text(
-                                "${Tienda.Tbuscadas[index].nombre}",
+                                "${Tienda.Tbuscadas[index].nombre}", //${Tienda.Tbuscadas[index].nombre}
                                 style: TextStyle(color: Colors.red,  fontSize: 20, fontFamily: 'Pacifico')
                             ),
                             Text(
@@ -112,31 +108,24 @@ class Buscar extends State<buscarproductos>{
     }
   }
   void seleccion (String p) {
-
     //Creamos esto para eliminar toda la lista al inicio
     Producto.Pbuscados.clear();
     Tienda.Tbuscadas.clear();
 
-    //Esta funcion identifica que producto contiene lo que se esta buscando y se agrega a 2 listas
     for (int i = 0; i<Producto.Productos.length; i++){
-      print("rwarw");
-      print("el nombre ${Producto.Productos[i].nombre_pro} contiene $p?");
       if ((Producto.Productos[i].nombre_pro).contains(p)){
-        print("SI LO CONTIENE");
         Producto.Pbuscados.add(Producto.Productos[i]);
-        print("La lista hasta le momento es:");
-
-        for (var x in Producto.Pbuscados){
-          print("${x.nombre_pro}");
-        }
         for (int j = 0; j<Tienda.Tiendas.length; j++){
           if (Producto.Productos[i].id_tienda == Tienda.Tiendas[j].id){
             Tienda.Tbuscadas.add(Tienda.Tiendas[j]);
           }
         }
       }
+    }
 
     }
-  }
+
+
+
 }
 

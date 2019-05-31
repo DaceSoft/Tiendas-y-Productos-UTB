@@ -40,6 +40,9 @@ class InformacionTiendas extends State<infotiendas> {
                     ),
                     textAlign: TextAlign.center,
                   ),
+                  leading: Container(
+                      child: CircleAvatar(child: Image.network(Tienda.Tiendas[index].foto))
+                  ),/////////////////
                   onTap: () {
                     print(Tienda.Tiendas.length);
                     print(index);
@@ -119,9 +122,14 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                 padding: EdgeInsets.all(30.0),
                 child: Column(
                   children: <Widget>[
+                    Container(
+                        width: 400,
+                        height: 150,
+                      child: Image.network(Ti.foto)/////////////////////////////////////////////
+                    ),
                     Row(
                       children: <Widget>[
-                        Text("CALIFICACION"),
+                        Text("CALIFICACION", style: TextStyle(fontSize: 20, color: Colors.red),),
                         Container(
                           padding: EdgeInsets.all(20.0),
                           child: SizedBox(
@@ -136,9 +144,9 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     ),
                     Row(
                       children: <Widget>[
-                        Text("HORARIO"),
+                        Text("HORARIO", style: TextStyle(fontSize: 20, color: Colors.red),),
                         Container(
-                          padding: EdgeInsets.all(40.0),
+                          padding: EdgeInsets.all(30.0),
                           child: SizedBox(
                               width: 150,
                               height: 20,
@@ -149,11 +157,11 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     ),
                     Row(
                       children: <Widget>[
-                        Text("UBICACION"),
+                        Text("UBICACION", style: TextStyle(fontSize: 20, color: Colors.red),),
                         Container(
                           padding: EdgeInsets.all(20.0),
                           child: SizedBox(
-                              width: 170,
+                              width: 140,
                               height: 20,
                               child: Text(
                                 "${Ti.ubicacion}",
