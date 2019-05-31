@@ -1,4 +1,3 @@
-
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
@@ -50,7 +49,7 @@ class Data
 
     for (var x in t) {
       Tienda.Tiendas.add(
-          Tienda(x["id"], x["nombre"], x["horario"], x["ubicacion"], ""));
+          Tienda(x["id_tienda"], x["nombre"], x["horario"], x["ubicacion"], ""));
     }
 
 

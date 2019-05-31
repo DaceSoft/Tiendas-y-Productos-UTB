@@ -70,8 +70,8 @@ class MyApp extends State<myapp> {
                       children: <Widget>[
                         Container(
                           child: Text(
-                            "Por favor, elija una opción:",
-                            style: TextStyle(color: Colors.green, fontSize: 25, fontFamily: 'Acme'),
+                            "Elija una opción:",
+                            style: TextStyle( fontSize: 25),
                             textAlign: TextAlign.center,
                           ),
                           width: 200,

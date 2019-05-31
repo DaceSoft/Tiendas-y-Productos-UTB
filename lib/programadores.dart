@@ -6,7 +6,7 @@ class programadores extends StatelessWidget{
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[700],
+        backgroundColor: Colors.blue[800],
         title: Text("Programadores", style: TextStyle(color: Colors.white)),
         centerTitle: true,
       ),

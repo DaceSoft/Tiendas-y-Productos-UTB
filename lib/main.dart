@@ -43,7 +43,7 @@ class splash extends State<myhomepage> {
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 1), () =>
+    Timer(Duration(seconds: 3), () =>
         Navigator.of(context).pushNamedAndRemoveUntil(
             '/screen1', (Route<dynamic> route) => false));
   }

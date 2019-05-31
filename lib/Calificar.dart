@@ -29,10 +29,12 @@ class calificar extends State<calificacion> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blue[800],
           title: Text(
             "${a.nombre}",
             style: TextStyle(color: Colors.white),
           ),
+          centerTitle: true,
         ),
         body: ListView(
           children: <Widget>[

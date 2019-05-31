@@ -84,7 +84,7 @@ class Buscar extends State<buscarproductos>{
                       child: ListTile(
                         title: Text(
                           "${Producto.Pbuscados[index].nombre_pro}",
-                          style: TextStyle(color: Colors.blue[700], fontSize: 30),
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                         subtitle: Column(
                           children: <Widget>[
@@ -99,8 +99,8 @@ class Buscar extends State<buscarproductos>{
                           ],
                         ),
                         trailing: Text(
-                          "${Producto.Pbuscados[index].precio}",
-                          style: TextStyle(fontSize: 50, fontFamily: 'Akronim', color: Colors.blueGrey),
+                          " \$${Producto.Pbuscados[index].precio}",
+                          style: TextStyle(fontSize: 40, fontFamily: 'Pacifico', color: Colors.blue[700]),
                         ),
                       )
                     )
