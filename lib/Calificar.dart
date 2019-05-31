@@ -163,11 +163,11 @@ class persona{
 }
 
 class resena{
-  int id_per;
+  int id_resena;
   int id_tien;
   int puntuacion;
-  String comentario;
-  resena([this.id_per,this.puntuacion, this.comentario, this.id_tien]);
+  String comentario,nombre,correo;
+  resena([this.id_resena,this.puntuacion, this.comentario, this.id_tien,this.nombre,this.correo]);
   static List<resena> resenas = new List<resena>();
   static List<resena> resenasdetiendas = new List<resena>();
 }

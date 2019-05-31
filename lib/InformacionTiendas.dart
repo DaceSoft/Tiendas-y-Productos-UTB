@@ -43,7 +43,7 @@ class InformacionTiendas extends State<infotiendas> {
                   onTap: () {
                     print(Tienda.Tiendas.length);
                     print(index);
-                    resenas(Tienda.Tiendas[index].id);
+                    //resenas(Tienda.Tiendas[index].id);
                     Tienda.Tiendas[index].calificacion = calificaciondelatienda(
                         Tienda.Tiendas[index].id); //////////////////
                     Productosdetienda(index + 1);
@@ -187,8 +187,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
           ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.blue,
+              color: Colors.grey[200],
             ),
             width: 300,
             height: 300,
@@ -225,7 +224,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
           Container(
             width: 300,
             height: 300,
-            color: Colors.blue,
+            color: Colors.grey[200],
             child: Card(
                 child: ListView.builder(
                     scrollDirection: Axis.vertical,
@@ -282,7 +281,9 @@ double calificaciondelatienda(int a) {
   return puntaje;
 }
 
-void resenas(int a) {
+// Te toca modificar esto
+
+/*void resenas(int a) {
   resena.resenasdetiendas.clear();
   persona.personasdetiendas.clear();
   for (int i = 0; i < resena.resenas.length; i++) {
@@ -295,4 +296,4 @@ void resenas(int a) {
       }
     }
   }
-}
+}*/
