@@ -3,6 +3,7 @@ import 'InformacionTiendas.dart';
 import 'package:flutter/material.dart';
 import 'MyApp.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:productosutb/Clases.dart';
 
 class calificacion extends StatefulWidget {
   Tienda a = new Tienda();
@@ -15,15 +16,15 @@ class calificacion extends StatefulWidget {
 }
 
 class calificar extends State<calificacion> {
-
-
   TextEditingController nombreper = new TextEditingController();
   TextEditingController correoper = new TextEditingController();
   TextEditingController comentper = new TextEditingController();
 
   double rating = 0.0;
   Tienda a = new Tienda();
+
   calificar(this.a);
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -53,7 +54,8 @@ class calificar extends State<calificacion> {
                         hintText: "Ingrese su nombre",
                         icon: Icon(Icons.account_circle),
                       ),
-                      controller: nombreper, autofocus: true,
+                      controller: nombreper,
+                      autofocus: true,
                     ),
                   ),
                   Container(
@@ -63,7 +65,8 @@ class calificar extends State<calificacion> {
                         hintText: "Ingrese su correo electrónico",
                         icon: Icon(Icons.mail_outline),
                       ),
-                      controller: correoper, autofocus: true,
+                      controller: correoper,
+                      autofocus: true,
                     ),
                   ),
                   Text(
@@ -88,17 +91,17 @@ class calificar extends State<calificacion> {
                   ),
                   Container(
                     padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(border: Border.all(color: Colors.blue[700])),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue[700])),
                     child: SizedBox(
                       height: 100,
                       width: 300,
                       child: TextField(
                         maxLines: 30,
                         decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: 'Comentarios'
-                        ),
-                        controller: comentper, autofocus: true,
+                            border: InputBorder.none, hintText: 'Comentarios'),
+                        controller: comentper,
+                        autofocus: true,
                       ),
                     ),
                   ),
@@ -108,67 +111,103 @@ class calificar extends State<calificacion> {
                         width: 100,
                         height: 60,
                         child: RaisedButton(
-                          child: Text("Enviar", style: TextStyle(fontFamily: 'Acme', fontSize: 22)),
-                          shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                          child: Text("Enviar",
+                              style:
+                                  TextStyle(fontFamily: 'Acme', fontSize: 22)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0)),
                           color: Colors.blue[700],
                           elevation: 20.0,
                           colorBrightness: Brightness.dark,
-                          onPressed: (){
+                          onPressed: () {
                             print("envio");
-                            //Navigator.push(context, MaterialPageRoute(builder: (context)=> infotiendas()));
-                            int id = persona.personas.length +1;
-                            persona per = new persona(id, nombreper.text, correoper.text);
-                            persona.personas.add(per);
 
-                            resena res = new resena(id, rating.toInt(), comentper.text,  a.id);
-                            resena.resenas.add(res);
-
-                            showDialog(context: context, child: mydialog());
-                            Navigator.pop(context);
+                            if (nombreper == "" ||
+                                correoper == "" ||
+                                rating == 0) {
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("¡Atención!"),
+                                      content: Text(
+                                          "Por favor digite todos los campos."),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Ok"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            } else if ((comentper.text).contains("maldito") ||
+                                (comentper.text).contains("hijueputa") ||
+                                (comentper.text).contains("hp") ||
+                                (comentper.text).contains("mierda")) {
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("¡ATENCIÓN!"),
+                                      content: Text(
+                                          "Por favor corrija su vocabulario."),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Ok"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            } else {
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Gracias"),
+                                      content:
+                                          Text("Tu reseña ha sido enviada."),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Ok"),
+                                          onPressed: () {
+                                            //Data.addResena(nombreper.text, correoper.text, a.id, comentper.text, rating.toInt());
+                                            calificaciondelatienda(a.id);
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            }
                           },
                         ),
-                      )
-                  )
+                      ))
                 ],
               ),
             )
           ],
         ));
   }
-
-
-  mydialog(){
-    return AlertDialog(
-      title: Text("Gracias"),
-      content: Text("Tu reseña ha sido enviada."),
-      actions: <Widget>[
-        FlatButton(child: Text("Ok"),
-          onPressed: (){
-            Navigator.pop(context);
-
-          },
-        )
-      ],
-    );
-  }
 }
 
-class persona{
-  int id;
-  String nombre;
-  String correo;
-  persona([this.id, this.nombre, this.correo]);
-  static List<persona> personas = new List<persona>();
-  static List<persona> personasdetiendas = new List<persona>();
-}
-
-class resena{
+class resena {
   int id_resena;
   int id_tien;
   int puntuacion;
-  String comentario,nombre,correo;
-  resena([this.id_resena,this.puntuacion, this.comentario, this.id_tien,this.nombre,this.correo]);
+  String comentario, nombre, correo;
+  resena(
+      [this.id_resena,
+      this.puntuacion,
+      this.comentario,
+      this.id_tien,
+      this.nombre,
+      this.correo]);
   static List<resena> resenas = new List<resena>();
   static List<resena> resenasdetiendas = new List<resena>();
 }
-

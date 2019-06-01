@@ -41,19 +41,21 @@ class InformacionTiendas extends State<infotiendas> {
                     textAlign: TextAlign.center,
                   ),
                   leading: Container(
-                      child: CircleAvatar(child: Image.network(Tienda.Tiendas[index].foto))
+                    width: 55,
+                      height: 55,
+                      child: CircleAvatar(
+                        child: ClipOval(
+                          child: Image.network(Tienda.Tiendas[index].foto)
+                        ),
+                        backgroundColor: Colors.transparent,
+                      )
                   ),/////////////////
                   onTap: () {
                     print(Tienda.Tiendas.length);
                     print(index);
-                    //resenas(Tienda.Tiendas[index].id);
-                    Tienda.Tiendas[index].calificacion = calificaciondelatienda(
-                        Tienda.Tiendas[index].id); //////////////////
-                    Productosdetienda(index + 1);
-
-                    for (var x in Producto.ProductosenTienda) {
-                      print(x.nombre_pro);
-                    }
+                    resenastiendas(Tienda.Tiendas[index].id);
+                    Tienda.Tiendas[index].calificacion = calificaciondelatienda(Tienda.Tiendas[index].id); //////////////////
+                    Productosdetienda(Tienda.Tiendas[index].id);
 
                     Navigator.push(
                         context,
@@ -129,7 +131,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     ),
                     Row(
                       children: <Widget>[
-                        Text("CALIFICACION", style: TextStyle(fontSize: 20, color: Colors.red),),
+                        Text("CALIFICACIÓN", style: TextStyle(fontSize: 20, color: Colors.red),),
                         Container(
                           padding: EdgeInsets.all(20.0),
                           child: SizedBox(
@@ -157,7 +159,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                     ),
                     Row(
                       children: <Widget>[
-                        Text("UBICACION", style: TextStyle(fontSize: 20, color: Colors.red),),
+                        Text("UBICACIÓN", style: TextStyle(fontSize: 20, color: Colors.red),),
                         Container(
                           padding: EdgeInsets.all(20.0),
                           child: SizedBox(
@@ -243,7 +245,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                           child: Container(
                             child: ListTile(
                               title: Text(
-                                "${persona.personasdetiendas[index].nombre}",
+                                "hla",//${persona.personasdetiendas[index].nombre}
                                 style: TextStyle(fontFamily: 'Acme', fontSize: 20, color: Colors.red[700]),
                               ),
                               subtitle: Text(
@@ -268,9 +270,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
 void Productosdetienda(int a) {
   Producto.ProductosenTienda.clear();
   for (int c = 0; c < Producto.Productos.length; c++) {
-    print("El id ${Producto.Productos[c].id_tienda} = $a?");
     if (Producto.Productos[c].id_tienda == a) {
-      print("El id ${Producto.Productos[c].id_tienda} = $a?");
       Producto.ProductosenTienda.add(Producto.Productos[c]);
     }
   }
@@ -289,19 +289,19 @@ double calificaciondelatienda(int a) {
   return puntaje;
 }
 
-// Te toca modificar esto
 
-/*void resenas(int a) {
+void resenastiendas (int a){
+  print("Las resenas son: ");
+  for (var x in resena.resenas){
+    print(x.nombre);
+  }
+  print("Esas son todas las reseñas");
+
   resena.resenasdetiendas.clear();
-  persona.personasdetiendas.clear();
-  for (int i = 0; i < resena.resenas.length; i++) {
-    if (resena.resenas[i].id_tien == a) {
+  for (int i = 0; i< resena.resenas.length; i++){
+    if (resena.resenas[i].id_tien == a){
       resena.resenasdetiendas.add(resena.resenas[i]);
-      for (int j = 0; j < persona.personas.length; j++) {
-        if (persona.personas[j].id == resena.resenas[i].id_per) {
-          persona.personasdetiendas.add(persona.personas[j]);
-        }
-      }
     }
   }
-}*/
+}
+
