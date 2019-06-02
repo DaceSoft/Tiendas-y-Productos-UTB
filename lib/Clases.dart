@@ -12,115 +12,66 @@ class Data
 {
   static Future<bool> getData() async
   {
-
-    bool tiendas,productos;
-
+    bool tiendas,productos,resenas;
     tiendas = await getTiendas();
-
     productos = await getProductos();
-
-    if(tiendas && productos)
+    resenas = await getResenas();
+    if(tiendas && productos && resenas)
       return true;
-
     return false;
-
-
-
   }
-
-
-
 
   static Future<bool> getTiendas() async
 
   {
     try{
-
-
-
       var dataTiendas = await http.get(
           "http://edgar-calderon.com/tiendas/tiendas.php");
-
-
       var t = json.decode(dataTiendas.body);
-
-
       Tienda.Tiendas.clear();
-
       for (var x in t) {
         Tienda.Tiendas.add(
             Tienda(x["id_tienda"], x["nombre"], x["horario"], x["ubicacion"], "http://edgar-calderon.com/tiendas/Recursos/Imagenes/Tiendas/${x["imagen"]}"));
       }
-
-
       return true;
     }
-
     catch(e)
     {
       return false;
     }
-
-
   }
 
-
   static Future<bool> getProductos() async
-
   {
-
     try
     {
-
       var dataProductos = await http.get(
           "http://edgar-calderon.com/tiendas/productos.php");
-
-
-
       var p = json.decode(dataProductos.body);
-
-
       Producto.Productos.clear();
-
-
-
       for (var x in p) {
-
-
         Producto.Productos.add(Producto(int.parse(x["id_producto"]),int.parse( x["id_tienda"]), x["nombre"],
             int.parse(x["precio"]), x["descripcion"]));
       }
-
-
-
-
       return true;
-
-
     }
-
-
     catch(e)
     {
       print("catch: $e");
       return false;
     }
-
-
   }
-
-
 
   static Future<bool> getResenas() async
   {
     try
     {
-      var dataProductos = await http.get(
+      var dataResenas = await http.get(
           "http://edgar-calderon.com/tiendas/resenas.php");
-      var p = json.decode(dataProductos.body);
+      var p = json.decode(dataResenas.body);
       resena.resenas.clear();
       for (var x in p) {
-        resena.resenas.add(resena(x["id_resena"], x["puntaje"],x["comentario"], x["id_tienda"],
+        resena.resenas.add(resena(int.parse(x["id_resena"]), int.parse(x["puntaje"]),x["comentario"], int.parse(x["id_tienda"]),
             x["nombre"], x["correo"]));
       }
       return true;
@@ -130,12 +81,10 @@ class Data
       print("catch: $e");
       return false;
     }
-
-
-
-
   }
-//PARA ENVIAR LA RESEÑA EN LA BASE DE DATOS Data.addResena()
+
+
+  //PARA ENVIAR LA RESEÑA EN LA BASE DE DATOS Data.addResena()
   static Future<bool> addResena(String nombre, String correo, int id_tienda, String comentario, int puntaje) async
   {
     try
@@ -152,10 +101,6 @@ class Data
       print("catch: $e");
       return false;
     }
-
-
-
-
   }
 
 
