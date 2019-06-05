@@ -151,7 +151,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                           padding: EdgeInsets.all(30.0),
                           child: SizedBox(
                               width: 150,
-                              height: 20,
+                              height: 40,
                               child: Text("${Ti.horario}",
                                   textAlign: TextAlign.center)),
                         )
@@ -164,7 +164,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                           padding: EdgeInsets.all(20.0),
                           child: SizedBox(
                               width: 140,
-                              height: 20,
+                              height: 70,
                               child: Text(
                                 "${Ti.ubicacion}",
                                 textAlign: TextAlign.justify,
@@ -245,7 +245,7 @@ class _MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
                           child: Container(
                             child: ListTile(
                               title: Text(
-                                "hla",//${persona.personasdetiendas[index].nombre}
+                                "${resena.resenasdetiendas[index].nombre}",
                                 style: TextStyle(fontFamily: 'Acme', fontSize: 20, color: Colors.red[700]),
                               ),
                               subtitle: Text(

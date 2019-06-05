@@ -163,7 +163,10 @@ class calificar extends State<calificacion> {
                                       ],
                                     );
                                   });
-                            } else {
+                            } else if((correoper.text).contains("@gmail.com")||
+                                (correoper.text).contains("@utb.edu.co")||
+                                (correoper.text).contains("@hotmail.com")||
+                                (correoper.text).contains("@outlook.com")){
                               return showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -175,9 +178,29 @@ class calificar extends State<calificacion> {
                                         FlatButton(
                                           child: Text("Ok"),
                                           onPressed: () {
-                                            //Data.addResena(nombreper.text, correoper.text, a.id, comentper.text, rating.toInt());
+                                            Data.addResena(nombreper.text, correoper.text, a.id, comentper.text, rating.toInt());
                                             calificaciondelatienda(a.id);
                                             Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                            }
+
+                            else{
+                              return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text("Dirección de correo no válida"),
+                                      content: Text(
+                                          "Por favor verifique su correo electrónico."),
+                                      actions: <Widget>[
+                                        FlatButton(
+                                          child: Text("Ok"),
+                                          onPressed: () {
                                             Navigator.pop(context);
                                           },
                                         )
